@@ -1,4 +1,5 @@
-#https://leetcode.com/problems/intersection-of-two-linked-lists/discuss/49798/Concise-python-code-with-comments
+# https://leetcode.com/problems/intersection-of-two-linked-lists/discuss/1092898/JS-Python-Java-C%2B%2B-or-Easy-O(1)-Extra-Space-Solution-w-Visual-Explanation
+
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
@@ -7,9 +8,17 @@
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
-        if headA and headB:
-            A, B = headA, headB
-            while A!=B:
-                A = A.next if A else headB
-                B = B.next if B else headA
-            return A
+        a = headA
+        b = headB
+        
+        while a != b:
+            if a:
+                a = a.next
+            else:
+                a = headB
+            
+            if b:
+                b = b.next
+            else:
+                b = headA
+        return a
