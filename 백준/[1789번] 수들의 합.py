@@ -1,14 +1,11 @@
 s = int(input())
-total = 0
-count= 1
-while True:
-    if total>=s:
+temp = 1
+n = 0
+while s!=0:
+    if s - temp < 0:
         break
-    total += count
-    if total>s:
-        total -= count
-        count +=2
-    else:
-        count += 1
-    print(total)
-print(count)
+    s -= temp
+    temp += 1
+    n += 1
+
+print(n)    
