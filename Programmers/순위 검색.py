@@ -1,4 +1,3 @@
-# https://hongcoding.tistory.com/56
 from itertools import combinations
 from bisect import bisect_left
 
@@ -38,4 +37,5 @@ def solution(info, query):
                 answer.append(len(scores) - enter)
         else:
             answer.append(0)
+    #print(info_dict)
     return answer
