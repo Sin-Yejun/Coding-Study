@@ -9,10 +9,10 @@ def solution(x, y, n):
     for i in range(x, x+n):
         for j in range(y, y+n):
             if color != arr[i][j]:
-                solution(x,y,n//2)
-                solution(x,y+n//2,n//2)
-                solution(x+n//2,y,n//2)
-                solution(x+n//2,y+n//2,n//2)
+                solution(x,y,n//2)          #1사분면
+                solution(x,y+n//2,n//2)     #2사분면
+                solution(x+n//2,y,n//2)     #3사분면
+                solution(x+n//2,y+n//2,n//2) #4사분면
                 return
     if color == 0:
         result.append(0)
