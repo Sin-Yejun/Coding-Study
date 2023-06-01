@@ -1,0 +1,3 @@
+print(bin(int(input())).count('1'))
+    
+    
