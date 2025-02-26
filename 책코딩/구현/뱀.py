@@ -54,24 +54,30 @@ def moving(x, y, c):
 time = 0
 snake_len = 1
 moving_history = deque([1,1])
+
 while q:
     time += 1
     x, y, c= q.popleft()
     x, y = moving(x, y, c)
     
-    if x < 1 or x > n or y < 1 or y > n: # 벽닿으면 죽음
+    # 벽닿으면 죽음
+    if x < 1 or x > n or y < 1 or y > n: 
         break
-
-    if board[x][y] == 1:
+    
+    # 사과 먹으면
+    if board[x][y] == 1: 
         snake_len += 1
+        board[x][y] = 0
+    else:   # 사과 없으면 꼬리 삭제  
+        moving_history.popleft()
 
     if [x,y] in moving_history: # 몸 닿으면 죽음
         break
 
-    while len(moving_history) > snake_len:
+    while len(moving_history) > snake_len: # 꼬리 삭제
         moving_history.popleft()
 
-    if time in cmd.keys():
+    if time in cmd.keys():  # 방향 전환
         c = direction(x, y, c, cmd[time])
 
     q.append([x, y, c])
