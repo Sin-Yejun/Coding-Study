@@ -2,8 +2,8 @@ n = int(input())
 num = list(map(int, input().split()))
 add, sub, mul, div = map(int, input().split())
 
-min_value = 1e9
-max_value = -1e9
+min_value = float('inf')
+max_value = float('-inf')
 
 def dfs(i, now):
     global min_value, max_value, add, sub, mul, div
