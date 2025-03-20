@@ -1,38 +1,31 @@
 from collections import defaultdict
+from collections import deque
+begin, target, words = "hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"]
+words = [begin] + words
+d = defaultdict(list)
+start = begin
+for i in range(len(words)):
+    temp = []
+    for j in range(len(words)):
+        cnt = 0
+        if i != j:
+            for k in range(len(begin)):
+                if words[i][k]  == words[j][k]:
+                    cnt += 1
+        else:
+            cnt
+        temp.append(len(begin)-cnt)
+    d[words[i]] = temp
 
-def check(word1, word2):        # 1개의 알파벳만 다른 문자 확인
-    cnt = 0
-    for i in range(len(word1)):
-        if word1[i] != word2[i]:
-            cnt += 1
-    if cnt == 1:
-        return True
-    else:
-        return False
+q = deque([(begin, d[begin], 0)])
 
-def solution(begin, target, words):
-    
-    if target not in words:
-        return 0
-    
-    graph = defaultdict(list)
-    for i in words:
-        if check(begin, i):
-            graph[begin].append(i)
-    for i in range(len(words)):
-        temp = []
-        for j in range(len(words)):
-            if i != j and check(words[i], words[j]):
-                temp.append(words[j])
-        graph[words[i]] = temp
-        
-    stack = [begin]
-    cnt = 0
-    while stack:
-        if stack[-1] in graph:
-            if target in graph[stack[-1]]:
-                return cnt+1
-            stack.append(graph[stack.pop()].pop())
-            cnt += 1
-    
-    
+while q:
+    w, path, cnt = q.popleft()
+    print(w, path, cnt)
+    if w == target:
+        print(cnt)
+        break
+    for i in range(len(path)):
+        if path[i] == 1:
+            path[i] -= 1
+            q.append((words[i], d[words[i]], cnt + 1))

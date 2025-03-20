@@ -1,16 +1,35 @@
+from collections import defaultdict
 def solution(genres, plays):
-    N = len(genres)
-    d = {}
-    for i in range(N):
-        g = genres[i]
-        if g in d:
-            d[g][i] = plays[i]
-        else:
-            d[g] = {i:plays[i]}
-    d = dict(sorted(d.items(), key = lambda x:-sum(x[1].values())))
+    index = [i for i in range(len(plays))]
+    d = defaultdict(int)
+    alls = []
+    for i, g, p in zip(index ,genres, plays):
+        alls.append((i, g, p))
+        d[g] += p
+    d = dict(sorted(d.items(), key=lambda x:x[1], reverse=True))
+    genre_order = defaultdict(int)
+    i = 0
+    for key in d.keys():
+        genre_order[key] = i
+        i += 1
+    alls = sorted(alls, key= lambda x: (genre_order[x[1]], -x[2]))
+    genres_count = 0
+    prev_genre = ''
     answer = []
-    for key, val_dic in d.items():
-        val_dic = sorted(val_dic.items(), key= lambda x:-x[1])[:2]
-        for key, val in val_dic:
-            answer.append(key)
+    for i, g, p in alls:
+        if not prev_genre:
+            genres_count += 1
+            prev_genre = g
+            answer.append(i)
+            continue
+        if prev_genre == g:
+            if genres_count < 2:
+                genres_count += 1
+                answer.append(i)
+            else:
+                continue
+        else:
+            genres_count = 1
+            prev_genre = g
+            answer.append(i)
     return answer
