@@ -1,13 +1,6 @@
-# https://coding-grandpa.tistory.com/85
+from collections import Counter
 def solution(participant, completion):
-    hashDict = {}
-    sumHash = 0
-    for part in participant:
-        hashDict[hash(part)] = part
-        sumHash += hash(part)
-    for comp in completion:
-        sumHash -= hash(comp)
-    
-    return hashDict[sumHash]
-        
-            
+    part = Counter(participant)
+    comp = Counter(completion)
+    diff = part-comp
+    return list(diff.keys())[0]
