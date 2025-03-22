@@ -42,13 +42,20 @@ for i in range(e):
 # 간선을 비용순으로 정렬
 edges.sort()
 
+mst_edges = []  # 최소 신장 트리에 포함된 간선 목록
+
 for edge in edges:
     cost, a, b = edge
     # 사이클이 발생하지 않는 경우에만 집합에 포함
     if find_parent(parent, a) != find_parent(parent, b):
         union_parnet(parent,a,b)
         result += cost
-print(result)
+        mst_edges.append((a, b, cost))  # 간선 저장
+
+print("총 비용:", result)
+print("최소 신장 트리에 포함된 간선들:")
+for a, b, cost in mst_edges:
+    print(f"{a} - {b} (비용: {cost})")
 # 7 9 
 # 1 2 29
 # 1 5 75
