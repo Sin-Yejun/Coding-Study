@@ -35,6 +35,8 @@ for s in arr:
             cnt += 1
             if i[0] == check_alpha and once == 0:
                 once = 1
+                if cnt != 1:
+                    answer += ' ' 
                 answer += f'[{i[0]}]{i[1:]}'
             else:
                 if cnt != 1:
