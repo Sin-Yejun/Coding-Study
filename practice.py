@@ -1,8 +1,8 @@
-from collections import Counter
+def base(n1, n2, base):
+    n1 = int(n1, base)
+    n2 = int(n2, base)
+    result = int(str(n1+n2), base)
+    print(result)
 
-c1 = Counter("abcaa")
-c2 = Counter("aabb")
 
-print(c1, c2)
-print(c1 + c2)  # 합집합처럼 누적
-print(c2 - c1)  # 빼기 (음수는 제거됨)
+base('57', '12', 5)
